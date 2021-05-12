@@ -1,0 +1,28 @@
+name: 京东签到
+
+on:
+  workflow_dispatch:
+  watch:
+    types: started
+  schedule:
+    - cron: "0 16 * * *"
+
+jobs:
+  jd:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+      - name: Install
+        run: npm install
+      - name: Run app
+        run: node JD.js
+        env:
+          SYNCURL: ${{ secrets.SYNCURL }}
+          JD_COOKIE: ${{ secrets.JD_COOKIE }}
