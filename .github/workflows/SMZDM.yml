@@ -1,0 +1,29 @@
+name: 什么值得买签到
+
+on:
+  workflow_dispatch:
+  watch:
+    types: started
+  schedule:
+    - cron: '0 17 * * *'
+
+jobs:
+  smzdm:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+      - name: Checkout codes
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - name: Install
+        run: npm install
+      - name: Run app
+        run: node SMZDM.js
+        env:
+          SMZDM_COOKIE: ${{ secrets.SMZDM_COOKIE }}
+          SMZDM_USER: ${{ secrets.SMZDM_USER }}
+          SMZDM_PASS: ${{ secrets.SMZDM_PASS }}

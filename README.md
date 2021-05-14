@@ -4,7 +4,7 @@
 
 1. 在`Settings`-`Secrets`里面添加`JD_COOKIE`
 
-2. 多条cookie用`&`隔开,支持无数条cookie
+2. 多条cookie用`&`隔开
 
 
 ```
@@ -20,4 +20,14 @@ pt_pin=***
 
 如有两个账号,则 JD_COOKIE 里面要填写的内容为
 pt_key=****;pt_pin=***&pt_key=****;pt_pin=***
+```
+
+## SMZDM
+
+1. 在`Settings`-`Secrets`里面添加`SMZDM_COOKIE`，`SMZDM_USER`，`SMZDM_PASS`
+
+```
+备注:
+Cookie 格式：
+sess=****;user=***|***;smzdm_id=***;
 ```
