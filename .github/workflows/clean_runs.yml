@@ -1,0 +1,22 @@
+name: 清除记录
+
+on:
+  workflow_dispatch:
+  watch:
+    types: started
+  schedule:
+    - cron: "0 23 * * *"
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+      - name: Delete workflow histories
+        uses: Mattraks/delete-workflow-runs@main
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 3
+          keep_minimum_runs: 0
